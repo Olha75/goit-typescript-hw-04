@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useState, useContext, ReactNode } from "react";
+import React, { createContext, useMemo, useState, useContext, ReactNode, ReactElement } from "react";
 import noop from "lodash/noop";
 
 type MenuIds = "first" | "second" | "last";
@@ -41,9 +41,9 @@ interface SelectedMenu {
   id: MenuIds;
 }
 
-function MenuProvider({ children }: PropsProvider) {
+function MenuProvider({ children }: PropsProvider):ReactElement  {
   // Додати тип для SelectedMenu він повинен містити { id }
-  const [selectedMenu, setSelectedMenu] = useState<SelectedMenu>({});
+  const [selectedMenu, setSelectedMenu] = useState<SelectedMenu>({} as SelectedMenu);
 
   const menuContextAction = useMemo(
     () => ({
@@ -69,7 +69,7 @@ function MenuProvider({ children }: PropsProvider) {
 }
 
 type PropsMenu = {
-  menus; // Додайте вірний тип для меню
+  menus: Menu[] // Додайте вірний тип для меню
 };
 
 function MenuComponent({ menus }: PropsMenu) {
